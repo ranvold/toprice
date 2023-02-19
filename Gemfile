@@ -20,6 +20,9 @@ gem 'turbo-rails', '1.3.3'
 
 group :development, :test do
   gem 'debug', '1.7.1'
+
+  gem 'rubocop', '1.45.1'
+  gem 'rubocop-rails', '2.17.4'
 end
 
 group :development do

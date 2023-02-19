@@ -1,0 +1,17 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+
+# Disable inline documentation since it is not practical or desired
+# to add it to every class and module.
+Style/Documentation:
+  Enabled: false
+
+# Disable frozen string literals since they may have unintended
+# consequences for existing code.
+Style/FrozenStringLiteralComment:
+  Enabled: false
