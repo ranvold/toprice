@@ -33,30 +33,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_141951) do
     t.integer "price", null: false
     t.string "discount", null: false
     t.integer "discount_price", null: false
+    t.string "url", null: false
     t.string "amount"
     t.bigint "company_id", null: false
     t.bigint "category_id", null: false
-    t.bigint "promotion_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
-    t.index ["name", "company_id"], name: "index_products_on_name_and_company_id", unique: true
-    t.index ["promotion_id"], name: "index_products_on_promotion_id"
-  end
-
-  create_table "promotions", force: :cascade do |t|
-    t.string "name", null: false
-    t.date "expiration", null: false
-    t.bigint "company_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_promotions_on_company_id"
-    t.index ["name", "company_id"], name: "index_promotions_on_name_and_company_id", unique: true
+    t.index ["name", "url"], name: "index_products_on_name_and_url", unique: true
   end
 
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
-  add_foreign_key "products", "promotions"
-  add_foreign_key "promotions", "companies"
 end
