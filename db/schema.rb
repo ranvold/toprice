@@ -31,9 +31,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_141951) do
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.integer "price", null: false
-    t.string "discount", null: false
+    t.integer "discount", null: false
     t.integer "discount_price", null: false
     t.string "url", null: false
+    t.date "expire", null: false
     t.string "amount"
     t.bigint "company_id", null: false
     t.bigint "category_id", null: false
