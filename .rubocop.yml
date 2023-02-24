@@ -15,3 +15,12 @@ Style/Documentation:
 # consequences for existing code.
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 24
+  Exclude:
+    - 'db/migrate/20230222153330_create_active_storage_tables.active_storage.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/20230222153330_create_active_storage_tables.active_storage.rb'
