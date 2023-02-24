@@ -13,6 +13,6 @@ class CreateProducts < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :products, %i[name url], unique: true
+    add_index :products, :url, unique: true
   end
 end
