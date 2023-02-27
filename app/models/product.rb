@@ -40,9 +40,9 @@ class Product < ApplicationRecord
       selected_products.each { |product| product[:category] = category }
 
       categorized_products.concat(selected_products)
-    end
 
-    new_products = new_products.reject { |p| categorized_products.include? p }
+      new_products = new_products.reject { |product| categorized_products.include? product }
+    end
 
     if new_products.present?
       other_category = Category.find_by(name: 'Інше')
@@ -55,6 +55,7 @@ class Product < ApplicationRecord
     categorized_products
   end
 
+  # TODO: delete after setup all categories
   def self.categorize_existing_products
     new_products = Product.all
 
@@ -69,7 +70,7 @@ class Product < ApplicationRecord
 
       categorized_products.concat(selected_products)
 
-      new_products = new_products.reject { |p| selected_products.include? p }
+      new_products = new_products.reject { |product| selected_products.include? product }
     end
 
     if new_products.present?
