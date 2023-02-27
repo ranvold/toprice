@@ -20,10 +20,10 @@ module Collector
         products_class_name = browser.divs[index += 1].class_name
       end
 
-      # while browser.span(text: 'Завантажити ще').parent.present?
-      #   browser.span(text: 'Завантажити ще').parent.click
-      #   sleep 3
-      # end
+      while browser.span(text: 'Завантажити ще').parent.present?
+        browser.span(text: 'Завантажити ще').parent.click
+        sleep 2
+      end
 
       products_nodes = browser.divs(class: products_class_name)
 
@@ -49,8 +49,8 @@ module Collector
           existing_products << product
           existing_products_count += 1
         else
-          product[:image] = URI.parse(div.image(alt: /\b#{product[:name]}/).src).open
-          sleep 2
+          product[:image] = URI.parse(div.img.src).open
+          sleep 3
           new_products << product
           new_products_count += 1
         end

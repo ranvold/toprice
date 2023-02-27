@@ -14,11 +14,11 @@ class Product < ApplicationRecord
   default_scope { order(discount: :desc) }
 
   def price_in_uah
-    price / 100
+    price.to_f / 100
   end
 
   def discount_price_in_uah
-    discount_price / 100
+    discount_price.to_f / 100
   end
 
   def price_in_uah=(val)
@@ -35,14 +35,14 @@ class Product < ApplicationRecord
     categorized_products = []
 
     categories.each do |category|
-      selected_products = new_products.select { |product| product[:name].downcase.match(/\b#{category.keywords}\b/) }
+      selected_products = new_products.select { |product| product[:name].downcase.match(/#{category.keywords}/) }
 
       selected_products.each { |product| product[:category] = category }
 
       categorized_products.concat(selected_products)
-
-      new_products = new_products.reject { |p| selected_products.include? p }
     end
+
+    new_products = new_products.reject { |p| categorized_products.include? p }
 
     if new_products.present?
       other_category = Category.find_by(name: 'Інше')
@@ -52,9 +52,37 @@ class Product < ApplicationRecord
       categorized_products.concat(new_products)
     end
 
-    categorized_products.each { |p| puts "#{p[:category].name} - #{p[:name]}" }
-
     categorized_products
+  end
+
+  def self.categorize_existing_products
+    new_products = Product.all
+
+    categories = Category.where.not(name: 'Інше')
+
+    categorized_products = []
+
+    categories.each do |category|
+      selected_products = new_products.select { |product| product.name.downcase.match(/#{category.keywords}/) }
+
+      selected_products.each { |product| product.category = category }
+
+      categorized_products.concat(selected_products)
+
+      new_products = new_products.reject { |p| selected_products.include? p }
+    end
+
+    if new_products.present?
+      other_category = Category.find_by(name: 'Інше')
+
+      new_products.each { |product| product.category = other_category }
+
+      categorized_products.concat(new_products)
+    end
+
+    categorized_products.each { |p| puts "#{p.category.name} - #{p.name}" }
+
+    categorized_products.each(&:save)
   end
 
   def self.update_existing_products(parsed_existing_products)
