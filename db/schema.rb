@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_100216) do
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
     t.index ["expire", "discount"], name: "index_products_on_expire_and_discount"
+    t.index ["name"], name: "index_products_on_name"
     t.index ["url"], name: "index_products_on_url", unique: true
   end
 
