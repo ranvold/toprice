@@ -13,6 +13,8 @@ class Product < ApplicationRecord
 
   default_scope { order(discount: :desc) }
 
+  scope :current, -> { where('expire >= ?', Date.current) }
+
   def price_in_uah
     price.to_f / 100
   end
