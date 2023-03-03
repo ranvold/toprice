@@ -11,6 +11,7 @@ export default class extends Controller {
     } else {
       filterbar.classList.remove('hidden')
       filterbar.classList.add('flex-col')
+      window.scrollTo(0, 0)
     }
   }
 }
