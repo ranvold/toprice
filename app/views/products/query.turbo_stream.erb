@@ -1,0 +1,3 @@
+<%= turbo_stream.replace 'products' do %>
+  <%= render partial: 'products', locals: { '@products': @products, '@pagy': @pagy } %>
+<% end %>

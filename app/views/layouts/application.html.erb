@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/nav' %>
+    <main class='p-2'>
+      <%= yield %>
+    </main>
   </body>
 </html>

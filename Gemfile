@@ -23,6 +23,8 @@ gem 'webdrivers', '5.2.0'
 
 gem 'image_processing', '1.12.2'
 
+gem 'pagy', '6.0.2'
+
 group :development, :test do
   gem 'debug', '1.7.1'
 
