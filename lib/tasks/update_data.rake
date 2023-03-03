@@ -7,7 +7,7 @@ namespace :update_data do
   end
 
   task fora: :environment do
-    company = Company.find_by(name: 'FORA')
+    company = Company.find_by(name: 'Фора')
 
     Collector::Fora.update(company)
   end

@@ -1,7 +1,7 @@
 module Collector
   class Fora
     def self.update(company)
-      browser = Watir::Browser.new
+      browser = Watir::Browser.new :firefox, http_client: { read_timeout: 360 }
 
       browser.goto(company.endpoint)
       sleep 2
@@ -39,8 +39,8 @@ module Collector
           url: div.a.href,
           name: div.h2.text,
           amount: div.h2.parent.div.text,
-          price_in_uah: price = div.div(text: /\b#{promo_expire_key}/).parent.divs[1].text.to_f,
-          discount_price_in_uah: discount_price = div.div(text: /\b#{promo_expire_key}/).parent.divs[2].text.to_f,
+          price_in_uah: price = div.div(text: /\b#{promo_expire_key}/).parent.divs[1].text.gsub(/,/, '.').to_f,
+          discount_price_in_uah: discount_price = div.div(text: /\b#{promo_expire_key}/).parent.divs[2].text.gsub(/,/, '.').to_f,
           discount: (100 - (discount_price * 100 / price)).round,
           expire: Date.strptime(div.div(text: /\b#{promo_expire_key}/).text.split.last, '%d.%m.%Y'),
           company:
