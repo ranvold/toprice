@@ -1,0 +1,25 @@
+<products id='products'>
+  <div class='bg-white mb-2'>
+    <div class='mb-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      <% @products.each do |product| %>
+        <%= link_to product do %>
+          <div class='group relative'>
+            <div class='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75 lg:aspect-none lg:h-80'>
+              <%= image_tag product.image, alt: product.name, class: 'h-full w-full object-cover rounded-md object-center lg:h-full lg:w-full' %>
+            </div>
+            <div class='mt-4'>
+              <h3 class='text-sm text-gray-700'>
+                <%= product.name %>
+              </h3>
+            </div>
+            <div class='flex justify-between'>
+              <div class='text-sm text-black-600 line-through'><%= number_to_currency product.price_in_uah, precision: 2, locale: :uk %></div>
+              <div class='text-md font-medium text-red-600'><%= number_to_currency product.discount_price_in_uah, precision: 2, locale: :uk %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%== pagy_nav(@pagy) %>
+</products>
