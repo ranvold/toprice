@@ -9,6 +9,6 @@
     <div><p><%= t :expire %>: <%= @product.expire %></p></div>
     <div><p><%= t :company %>: <%= @product.company.name %></p></div>
     <div><p><%= t :category %>: <%= @product.category.name %></p></div>
-    <%= link_to t(:on_the_official_site), @product.url, class: 'text-blue-600' %>
+    <%= link_to t(:on_the_official_site), @product.url, class: 'text-blue-600', target: :_blank %>
   </div>
 </div>
