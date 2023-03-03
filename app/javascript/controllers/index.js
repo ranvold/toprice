@@ -2,4 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from './application'
+import { application } from "./application"
+
+import Products__QueryController from "./products/query_controller"
+application.register("products--query", Products__QueryController)
+
+import Products__ToggleMobileFilterbarController from "./products/toggle_mobile_filterbar_controller"
+application.register("products--toggle-mobile-filterbar", Products__ToggleMobileFilterbarController)
