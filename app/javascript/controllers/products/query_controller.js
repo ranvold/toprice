@@ -36,18 +36,20 @@ function hideFilterBar() {
 // Connects to data-controller='products--query'
 export default class extends Controller {
   connect() {
-    if (sessionStorage.getItem('companiesCheckboxesIds') !== null) {
-      const companiesCheckboxesIds = JSON.parse(sessionStorage.getItem('companiesCheckboxesIds'))
-  
-      for (const id of companiesCheckboxesIds) {
-        document.getElementById(id).checked = true
+    if (document.getElementById('filterbar') !== null) {
+      if (sessionStorage.getItem('companiesCheckboxesIds') !== null) {
+        const companiesCheckboxesIds = JSON.parse(sessionStorage.getItem('companiesCheckboxesIds'))
+    
+        for (const id of companiesCheckboxesIds) {
+          document.getElementById(id).checked = true
+        }
       }
-    }
-    if (sessionStorage.getItem('categoriesCheckboxesIds') !== null) {
-      const categoriesCheckboxesIds = JSON.parse(sessionStorage.getItem('categoriesCheckboxesIds'))
-  
-      for (const id of categoriesCheckboxesIds) {
-        document.getElementById(id).checked = true
+      if (sessionStorage.getItem('categoriesCheckboxesIds') !== null) {
+        const categoriesCheckboxesIds = JSON.parse(sessionStorage.getItem('categoriesCheckboxesIds'))
+    
+        for (const id of categoriesCheckboxesIds) {
+          document.getElementById(id).checked = true
+        }
       }
     }
   }
