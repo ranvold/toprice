@@ -9,11 +9,11 @@ class Product < ApplicationRecord
   validates :discount, presence: true
   validates :discount_price, presence: true
   validates :url, presence: true, uniqueness: true
-  validates :expire, presence: true
+  validates :expiration, presence: true
 
   default_scope { order(discount: :desc) }
 
-  scope :current, -> { where('expire >= ?', Date.current) }
+  scope :current, -> { where('expiration >= ?', Date.current) }
 
   def price_in_uah
     price.to_f / 100
@@ -94,7 +94,7 @@ class Product < ApplicationRecord
         price_in_uah: product[:price_in_uah],
         discount: product[:discount],
         discount_price_in_uah: product[:discount_price_in_uah],
-        expire: product[:expire]
+        expiration: product[:expiration]
       )
     end
   end
@@ -109,7 +109,7 @@ class Product < ApplicationRecord
         discount: product[:discount],
         discount_price_in_uah: product[:discount_price_in_uah],
         url: product[:url],
-        expire: product[:expire],
+        expiration: product[:expiration],
         company: product[:company],
         category: product[:category],
         amount: product[:amount]

@@ -6,7 +6,7 @@
     <div><p><%= t :discount %>: <%= @product.discount %>%</p></div>
     <div><p><%= t :discount_price %>: <%= number_to_currency @product.discount_price_in_uah, precision: 2, locale: :uk %></div>
     <div><p><%= t :amount %>: <%= @product.amount %></p></div>
-    <div><p><%= t :expire %>: <%= @product.expire %></p></div>
+    <div><p><%= t :expiration %>: <%= @product.expiration %></p></div>
     <div><p><%= t :company %>: <%= @product.company.name %></p></div>
     <div><p><%= t :category %>: <%= @product.category.name %></p></div>
     <%= link_to t(:on_the_official_site), @product.url, class: 'text-blue-600', target: :_blank %>

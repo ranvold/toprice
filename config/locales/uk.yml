@@ -10,7 +10,7 @@ uk:
   discount_price: 'Ціна зі знижкою'
   discount: 'Знижка'
   amount: 'Кількість'
-  expire: 'Закінчується'
+  expiration: 'Закінчується'
   on_the_official_site: 'На офіційному сайті'
   enter_the_name_of_the_product: 'Введіть назву продукту...'
   search: 'Знайти'
