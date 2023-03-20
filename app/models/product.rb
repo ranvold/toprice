@@ -24,11 +24,11 @@ class Product < ApplicationRecord
   end
 
   def price_in_uah=(val)
-    self.price = val * 100
+    self.price = (val * 100).to_i
   end
 
   def discount_price_in_uah=(val)
-    self.discount_price = val * 100
+    self.discount_price = (val * 100).to_i
   end
 
   def self.categorize(new_products)
