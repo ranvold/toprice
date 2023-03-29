@@ -6,11 +6,11 @@ ruby '3.2.1'
 gem 'rails', '7.0.4.3'
 
 gem 'pg', '1.4.6'
-gem 'puma', '5.6.5'
+gem 'puma', '6.2.0'
 
 gem 'bootsnap', '1.16.0', require: false
 
-gem 'propshaft', '0.6.4'
+gem 'propshaft', '0.7.0'
 
 gem 'cssbundling-rails', '1.1.2'
 gem 'jsbundling-rails', '1.1.1'
@@ -26,7 +26,7 @@ gem 'image_processing', '1.12.2'
 gem 'pagy', '6.0.2'
 
 group :development, :test do
-  gem 'debug', '1.7.1'
+  gem 'debug', '1.7.2'
 
   gem 'rubocop', '1.48.1'
   gem 'rubocop-rails', '2.18.0'
