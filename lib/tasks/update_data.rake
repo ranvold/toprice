@@ -11,4 +11,10 @@ namespace :update_data do
 
     Collector::Fora.update(company)
   end
+
+  task varus: :environment do
+    company = Company.find_by(name: 'Варус')
+
+    Collector::Varus.update(company)
+  end
 end
