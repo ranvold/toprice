@@ -1,5 +1,9 @@
 module Collector
+  # rubocop:disable Metrics/AbcSize
   class Fora
+    PROMO_EXPIRATION_KEY = 'Пропозиція діє:'.freeze
+    EXTEND_PAGE = 'Завантажити ще'.freeze
+
     def self.update(company)
       browser = Watir::Browser.new :firefox, http_client: { read_timeout: 360 }
 
@@ -10,59 +14,55 @@ module Collector
              .button(class: 'MuiButtonBase-root MuiButton-root').click
       sleep 2
 
-      # browser.h1(text: 'Акції').parent.span.text.to_i
-      count = 24
+      count = browser.h1(text: 'Акції').parent.span.text.to_i
+      count = [count, 24].min
 
       products_class_name = ''
 
       index = -1
-      while count != browser.divs(class: products_class_name).count
+      loop do
         products_class_name = browser.divs[index += 1].class_name
+
+        break if count == browser.divs(class: products_class_name).count
       end
 
-      while browser.span(text: 'Завантажити ще').parent.present?
-        browser.span(text: 'Завантажити ще').parent.click
+      while browser.span(text: EXTEND_PAGE).parent.present?
+        browser.span(text: EXTEND_PAGE).parent.click
         sleep 2
       end
 
-      products_nodes = browser.divs(class: products_class_name)
+      assign_products(browser.divs(class: products_class_name), company)
 
+      browser.close
+    end
+
+    def self.assign_products(products, company)
       new_products = []
-      new_products_count = 0
       existing_products = []
-      existing_products_count = 0
 
-      promo_expiration_key = 'Пропозиція діє:'
-
-      products_nodes.each do |div|
+      products.each do |div|
         product = {
           url: div.a.href,
           name: div.h2.text.tr('«»®', ''),
           amount: div.h2.parent.div.text,
-          price_in_uah: price = div.div(text: /\b#{promo_expiration_key}/).parent.divs[1].text.tr(',', '.').to_f,
-          discount_price_in_uah: discount_price = div.div(text: /\b#{promo_expiration_key}/).parent.divs[2].text.tr(',', '.').to_f,
-          discount: (100 - (discount_price * 100 / price)).round,
-          expiration: Date.strptime(div.div(text: /\b#{promo_expiration_key}/).text.split.last, '%d.%m.%Y'),
+          price_in_uah: pu = div.div(text: /\b#{PROMO_EXPIRATION_KEY}/).parent.divs[1].text.tr(',', '.').to_f,
+          discount_price_in_uah: dpu = div.div(text: /\b#{PROMO_EXPIRATION_KEY}/).parent.divs[2].text.tr(',', '.').to_f,
+          discount: (100 - (dpu * 100 / pu)).round,
+          expire_on: Date.strptime(div.div(text: /\b#{PROMO_EXPIRATION_KEY}/).text.split.last, '%d.%m.%Y'),
           company:
         }
         if Product.exists?(url: product[:url])
           existing_products << product
-          existing_products_count += 1
         else
           product[:image] = URI.parse(div.img.src).open
           sleep 3
           new_products << product
-          new_products_count += 1
         end
       end
-
-      browser.close
-
-      puts "Found #{new_products_count} new products to be saved"
-      puts "Found #{existing_products_count} existing products to be updated"
 
       Product.add_new_products(new_products) if new_products.present?
       Product.update_existing_products(existing_products) if existing_products.present?
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end

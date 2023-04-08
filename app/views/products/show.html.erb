@@ -1,14 +1,15 @@
-<div class='p-2 flex flex-col sm:flex-row rounded border-2 border-gray-300'>
+<div class='p-2 flex flex-col sm:flex-row rounded border-2 border-gray-300 mb-4'>
   <div><%= image_tag @product.image %></div>
   <div class='p-2 flex flex-col border-t-2 sm:border-t-0 sm:border-l-2 leading-9'>
     <div><p><b><%= @product.name %></b></p></div>
-    <div><p><%= t :price %>: <%= number_to_currency @product.price_in_uah, precision: 2, locale: :uk %></div>
-    <div><p><%= t :discount %>: <%= @product.discount %>%</p></div>
-    <div><p><%= t :discount_price %>: <%= number_to_currency @product.discount_price_in_uah, precision: 2, locale: :uk %></div>
-    <div><p><%= t :amount %>: <%= @product.amount %></p></div>
-    <div><p><%= t :expiration %>: <%= @product.expiration %></p></div>
-    <div><p><%= t :company %>: <%= @product.company.name %></p></div>
-    <div><p><%= t :category %>: <%= @product.category.name %></p></div>
+    <div><p><%= t(:price) %>: <%= number_to_currency @product.price_in_uah, precision: 2, locale: :uk %></div>
+    <div><p><%= t(:discount) %>: <%= @product.discount %>%</p></div>
+    <div><p><%= t(:discount_price) %>: <%= number_to_currency @product.discount_price_in_uah, precision: 2, locale: :uk %></div>
+    <div><p><%= t(:amount) %>: <%= @product.amount %></p></div>
+    <div><p><%= t(:expire_on) %>: <%= @product.expire_on %></p></div>
+    <div><p><%= t(:company) %>: <%= @product.company.name %></p></div>
+    <div><p><%= t(:category) %>: <%= @product.category.name %></p></div>
     <%= link_to t(:on_the_official_site), @product.url, class: 'text-blue-600', target: :_blank %>
   </div>
 </div>
+<%= link_to t(:back), 'javascript:history.back()', class: 'bg-green-700 px-4 py-2 rounded-md font-normal' %>
