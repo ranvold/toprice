@@ -10,6 +10,8 @@ gem 'puma', '6.2.1'
 
 gem 'bootsnap', '1.16.0', require: false
 
+gem 'devise', '4.9.2'
+
 gem 'propshaft', '0.7.0'
 
 gem 'cssbundling-rails', '1.1.2'
