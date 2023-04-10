@@ -1,0 +1,21 @@
+<%= form_with model: [:admin_panel, category] do |f| %>
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <% category.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :keywords %><br>
+    <%= f.text_area :keywords %><br>
+    <% category.errors.full_messages_for(:keywords).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
