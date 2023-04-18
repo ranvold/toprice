@@ -45,7 +45,7 @@ module AdminPanel
     end
 
     def category_params
-      params.require(:category).permit(:name, :keywords)
+      params.require(:category).permit(:name, :keywords_by_semicolons)
     end
   end
 end

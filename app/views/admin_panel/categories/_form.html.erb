@@ -9,7 +9,7 @@
 
   <div>
     <%= f.label :keywords %><br>
-    <%= f.text_area :keywords %><br>
+    <%= f.text_area :keywords_by_semicolons %><br>
     <% category.errors.full_messages_for(:keywords).each do |message| %>
       <div><%= message %></div>
     <% end %>
