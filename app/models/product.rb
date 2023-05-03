@@ -24,7 +24,7 @@ class Product < ApplicationRecord
     categorized_products = []
 
     categories.each do |category|
-      selected_products = new_products.select { |product| product[:name].downcase.match(/#{category.keywords}/) }
+      selected_products = new_products.select { |product| product[:name].match(/#{category.keywords}/i) }
 
       selected_products.each { |product| product[:category] = category }
 
@@ -55,7 +55,7 @@ class Product < ApplicationRecord
     categorized_products = []
 
     categories.each do |category|
-      selected_products = new_products.select { |product| product.name.downcase.match(/#{category.keywords}/) }
+      selected_products = new_products.select { |product| product.name.match(/#{category.keywords}/i) }
 
       selected_products.each { |product| product.category = category }
 
