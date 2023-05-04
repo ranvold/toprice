@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Toprice</title>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+  </head>
+
+  <body>
+    <!-- TODO: Navbar for admin_panel -->
+    <% if admin_panel_admin_signed_in? %>
+      <%= link_to 'Sign out', destroy_admin_panel_admin_session_path, data: { turbo_method: :delete } %>
+    <% end %>
+    <p class='notice'><%= notice %></p>
+    <p class='alert'><%= alert %></p>
+    <main class='p-2'>
+      <%= yield %>
+    </main>
+  </body>
+</html>

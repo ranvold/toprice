@@ -1,0 +1,11 @@
+<h1><%= @category.name %></h1>
+
+<p><%= @category.keywords_by_semicolons %></p>
+
+<ul>
+  <li><%= link_to 'Edit', edit_admin_panel_category_path(@category) %></li>
+  <li><%= link_to 'Destroy', admin_panel_category_path(@category), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: 'Are you sure?'
+                  } %></li>
+</ul>

@@ -1,20 +1,32 @@
 uk:
-  filters: 'Фільтри'
-  company: 'Компанія'
-  companies: 'Компанії'
-  category: 'Категорія'
-  categories: 'Категорії'
-  clear: 'Скинути'
-  apply: 'Застосувати'
-  price: 'Ціна'
-  discount_price: 'Ціна зі знижкою'
-  discount: 'Знижка'
-  amount: 'Кількість'
-  expire: 'Закінчується'
-  on_the_official_site: 'На офіційному сайті'
-  enter_the_name_of_the_product: 'Введіть назву продукту...'
-  search: 'Знайти'
+  filter:
+    toggle_button: Фільтри
+    companies: Компанії
+    categories: Категорії
+    clear: Скинути
+    apply: Застосувати
+  company: Компанія
+  category: Категорія
+  back: Назад
+  price: Ціна
+  discount_price: Ціна зі знижкою
+  discount: Знижка
+  amount: Кількість
+  expire_on: Знижка закінчується
+  on_the_official_site: На офіційному сайті
+  enter_the_name_of_the_product: Введіть назву продукту...
+  search: Знайти
   activerecord:
+    models:
+      category: Категорію
+      company: Компанію
+    attributes:
+      category:
+        name: Назва
+        keywords: Ключові слова
+      company:
+        name: Назва
+        endpoint: Сторінка з акціями
     errors:
       messages:
         record_invalid: 'Виникли помилки: %{errors}'
