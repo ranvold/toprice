@@ -5,9 +5,11 @@ module Collector
       browser = Watir::Browser.new :firefox, http_client: { read_timeout: 360 }
 
       browser.goto(company.endpoint)
-      sleep 2
+      sleep 5
 
       while browser.button(class: 'sf-button products__load-more').present?
+        break if browser.div(class: 'sf-product-card__out-of-stock').present?
+
         browser.button(class: 'sf-button products__load-more').click
         sleep 2
       end
@@ -18,10 +20,12 @@ module Collector
     end
 
     def self.assign_products(products, company)
-      new_products = existing_products = []
+      new_products = []
+      existing_products = []
 
       products.each do |div|
         next if div.span(class: 'sf-price__regular').present?
+        next if div.div(class: 'sf-product-card__out-of-stock').present?
 
         product = {
           url: div.a.href,

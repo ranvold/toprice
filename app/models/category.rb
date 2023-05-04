@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   validates :keywords, presence: true
 
   def keywords_by_semicolons
-    keywords&.tr('\\\b', '')&.split('|')&.map { |word| "#{word};" }&.join
+    keywords&.gsub('\\b', '')&.split('|')&.map { |word| "#{word};" }&.join
   end
 
   def keywords_by_semicolons=(val)
