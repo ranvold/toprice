@@ -17,4 +17,10 @@ namespace :update_data do
 
     Collector::Varus.update(company)
   end
+
+  task silpo: :environment do
+    company = Company.find_by(name: 'Сільпо')
+
+    Collector::Silpo.update(company)
+  end
 end
