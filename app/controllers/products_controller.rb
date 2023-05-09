@@ -39,6 +39,6 @@ class ProductsController < ApplicationController
 
   def set_filter
     @companies = Company.all
-    @categories = Category.all
+    @categories = Category.order_by_id
   end
 end

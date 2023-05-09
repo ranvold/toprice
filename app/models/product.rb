@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
   # rubocop:disable Metrics/AbcSize
   def self.categorize(new_products)
-    categories = Category.where.not(name: 'Інше')
+    categories = Category.where.not(name: 'Інше').order_by_id
 
     categorized_products = []
 
@@ -50,7 +50,7 @@ class Product < ApplicationRecord
   def self.categorize_existing_products
     new_products = Product.all
 
-    categories = Category.where.not(name: 'Інше')
+    categories = Category.where.not(name: 'Інше').order_by_id
 
     categorized_products = []
 
@@ -72,7 +72,7 @@ class Product < ApplicationRecord
       categorized_products.concat(new_products)
     end
 
-    # categorized_products.each { |p| puts "#{p.category.name} - #{p.name}" }
+    categorized_products.each { |p| puts "#{p.category.name} - #{p.name}" }
 
     categorized_products.each(&:save)
   end

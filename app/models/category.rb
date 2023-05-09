@@ -1,8 +1,10 @@
 class Category < ApplicationRecord
-  has_many :products, dependent: :destroy
+  has_many :products, dependent: :restrict_with_exception
 
   validates :name, presence: true, uniqueness: true
   validates :keywords, presence: true
+
+  scope :order_by_id, -> { order(:id) }
 
   def keywords_by_semicolons
     keywords&.gsub('\\b', '')&.split('|')&.map { |word| "#{word};" }&.join
