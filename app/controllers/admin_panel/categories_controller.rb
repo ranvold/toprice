@@ -3,7 +3,7 @@ module AdminPanel
     before_action :set_category, only: %i[show edit update destroy]
 
     def index
-      @categories = Category.all
+      @categories = Category.order_by_id
     end
 
     def show; end
