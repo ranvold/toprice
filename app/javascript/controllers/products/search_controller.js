@@ -76,23 +76,22 @@ export default class extends Controller {
         headers: {'Accept': 'text/vnd.turbo-stream.html'}})
       .then(response => response.text())
       .then(html => Turbo.renderStreamMessage(html))
+      .then(this.hideFilter())
       .catch(error => console.log(error))
-
-      this.hideFilter()
     } else {
       this.clear()
 
       const url = `/products/search?name=${name}`
 
       fetch(url)
-        .then(response => response.text())
-        .then(html => {
-          document.open()
-          document.write(html)
-          document.close()
-          history.pushState({}, '', url)
-        })
-        .catch(error => console.error(error))
+      .then(response => response.text())
+      .then(html => {
+        document.open()
+        document.write(html)
+        document.close()
+        history.pushState({}, '', url)
+      })
+      .catch(error => console.error(error))
     }
   }
 
