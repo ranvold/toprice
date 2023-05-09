@@ -4,7 +4,7 @@
       <%= link_to 'Toprice', root_path, class: 'bg-peach text-black active:text-white sm:hover:text-white rounded-md px-2 sm:px-4 py-3 font-medium', data: { controller: 'products--search', action: 'click->products--search#clear' } %>
     </div>
     <div class='flex items-center gap-2'>
-      <%= text_field_tag 'search_field', nil, placeholder: t(:enter_the_name_of_the_product), class: 'px-2 rounded-md h-8 w-60 sm:w-96', data: { controller: 'products--search', action: 'keydown.enter->products--search#apply' } %>
+      <%= text_field_tag 'search_field', nil, placeholder: t(:enter_the_name_of_the_product), autocomplete: 'off', class: 'px-2 rounded-md h-8 w-60 sm:w-96', data: { controller: 'products--search', action: 'keydown.enter->products--search#apply' } %>
       <div>
         <button type='button' class='sm:bg-yellow-400 sm:rounded-md sm:p-1' data-controller='products--search' data-action='click->products--search#apply'>
           <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='sm:hidden w-6 h-6'>

@@ -12,10 +12,11 @@ class ProductsController < ApplicationController
   end
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
   def search
-    companies = JSON.parse(params[:companies])
-    categories = JSON.parse(params[:categories])
-    name = JSON.parse(params[:name])
+    companies = JSON.parse(params[:companies]) if params[:companies].present?
+    categories = JSON.parse(params[:categories]) if params[:categories].present?
+    name = JSON.parse(params[:name]) if params[:name].present?
 
     @products = Product.current
 
@@ -27,10 +28,11 @@ class ProductsController < ApplicationController
     @pagy, @products = pagy(@products)
 
     respond_to do |format|
-      format.turbo_stream
       format.html { render :index }
+      format.turbo_stream
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/AbcSize
 
   private
