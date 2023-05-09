@@ -20,6 +20,8 @@ module Collector
         sleep 2
       end
 
+      browser.close
+
       current_page = 1
       while current_page <= last_page
         browser = Watir::Browser.new(:chrome, options: { args: ['--ignore-certificate-errors'] },
