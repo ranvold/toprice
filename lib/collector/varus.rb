@@ -20,17 +20,13 @@ module Collector
         sleep 2
       end
 
-      browser.goto(company.endpoint)
-      assign_products(browser.divs(class: 'm-category-list__item'), company)
-      browser.close
-
       current_page = 1
       while current_page <= last_page
         browser = Watir::Browser.new(:chrome, options: { args: ['--ignore-certificate-errors'] },
                                               http_client: { read_timeout: 360 })
-        current_page += 1
         browser.goto("#{company.endpoint}?page=#{current_page}")
         assign_products(browser.divs(class: 'm-category-list__item'), company)
+        current_page += 1
         browser.close
       end
     end
