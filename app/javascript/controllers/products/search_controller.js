@@ -27,19 +27,13 @@ function setFilterToSessionStorage() {
 }
 
 function resetFilter() {
-  for (const checkboxes of CHECKBOXES_NAMES) {
-    for (const div of document.getElementById(checkboxes).children) {
-      div.children[0].checked = false
+  if (document.getElementById('filter') !== null) {
+    for (const checkboxes of CHECKBOXES_NAMES) {
+      for (const div of document.getElementById(checkboxes).children) {
+        div.children[0].checked = false
+      }
     }
   }
-}
-
-function hideFilter() {
-  const filter = document.getElementById('filter')
-
-  filter.classList.remove('sticky')
-  filter.classList.add('hidden')
-  window.scrollTo(0, 0)
 }
 
 function refreshFilter() {
@@ -68,22 +62,38 @@ export default class extends Controller {
   }
 
   apply() {
-    setFilterToSessionStorage()
-
     const name = JSON.stringify((document.getElementById('search_field').value).toString())
 
-    const companies = sessionStorage.getItem(CHECKBOXES_NAMES[0])
-    const categories = sessionStorage.getItem(CHECKBOXES_NAMES[1])
+    if (document.getElementById('filter') !== null) {
+      setFilterToSessionStorage()
 
-    const params = `companies=${companies}&categories=${categories}&name=${name}`
+      const companies = sessionStorage.getItem(CHECKBOXES_NAMES[0])
+      const categories = sessionStorage.getItem(CHECKBOXES_NAMES[1])
 
-    fetch(`/products/search?${params}`, {
-      headers: {'Accept': 'text/vnd.turbo-stream.html'}})
-    .then(response => response.text())
-    .then(html => Turbo.renderStreamMessage(html))
-    .catch(error => console.log(error))
+      const params = `companies=${companies}&categories=${categories}&name=${name}`
 
-    hideFilter()
+      fetch(`/products/search?${params}`, {
+        headers: {'Accept': 'text/vnd.turbo-stream.html'}})
+      .then(response => response.text())
+      .then(html => Turbo.renderStreamMessage(html))
+      .catch(error => console.log(error))
+
+      this.hideFilter()
+    } else {
+      this.clear()
+
+      const url = `/products/search?name=${name}`
+
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          document.open()
+          document.write(html)
+          document.close()
+          history.pushState({}, '', url)
+        })
+        .catch(error => console.error(error))
+    }
   }
 
   toggleFilter() {
@@ -98,9 +108,19 @@ export default class extends Controller {
     }
   }
 
+  hideFilter() {
+    if (document.getElementById('filter') !== null) {
+      const filter = document.getElementById('filter')
+    
+      filter.classList.remove('sticky')
+      filter.classList.add('hidden')
+      window.scrollTo(0, 0)
+    }
+  }
+
   clear() {
     sessionStorage.clear()
     resetFilter()
-    hideFilter()
+    this.hideFilter()
   }
 }
