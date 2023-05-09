@@ -4,5 +4,5 @@ class Company < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :endpoint, presence: true
 
-  before_validation { name.capitalize! }
+  before_validation { name.upcase! }
 end

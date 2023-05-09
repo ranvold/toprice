@@ -5,7 +5,7 @@
     <div><p><%= t(:price) %>: <%= number_to_currency @product.price_in_uah, precision: 2, locale: :uk %></div>
     <div><p><%= t(:discount) %>: <%= @product.discount %>%</p></div>
     <div><p><%= t(:discount_price) %>: <%= number_to_currency @product.discount_price_in_uah, precision: 2, locale: :uk %></div>
-    <div><p><%= t(:amount) %>: <%= @product.amount %></p></div>
+    <div><p><%= t(:amount) %>: <%= @product.amount || '-' %></p></div>
     <div><p><%= t(:expire_on) %>: <%= @product.expire_on %></p></div>
     <div><p><%= t(:company) %>: <%= @product.company.name %></p></div>
     <div><p><%= t(:category) %>: <%= @product.category.name %></p></div>

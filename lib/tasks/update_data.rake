@@ -7,20 +7,26 @@ namespace :update_data do
   end
 
   task fora: :environment do
-    company = Company.find_by(name: 'Фора')
+    company = Company.find_by(name: 'ФОРА')
 
     Collector::Fora.update(company)
   end
 
   task varus: :environment do
-    company = Company.find_by(name: 'Варус')
+    company = Company.find_by(name: 'ВАРУС')
 
     Collector::Varus.update(company)
   end
 
   task silpo: :environment do
-    company = Company.find_by(name: 'Сільпо')
+    company = Company.find_by(name: 'СІЛЬПО')
 
     Collector::Silpo.update(company)
+  end
+
+  task atb: :environment do
+    company = Company.find_by(name: 'АТБ')
+
+    Collector::Atb.update(company)
   end
 end
