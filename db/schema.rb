@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_100216) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_09_175003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_100216) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "keywords", null: false
@@ -64,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_100216) do
     t.integer "discount", null: false
     t.integer "discount_price", null: false
     t.string "url", null: false
-    t.date "expire", null: false
+    t.date "expire_on", null: false
     t.string "amount"
     t.bigint "company_id", null: false
     t.bigint "category_id", null: false
@@ -72,7 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_100216) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
-    t.index ["expire", "discount"], name: "index_products_on_expire_and_discount"
+    t.index ["expire_on", "discount"], name: "index_products_on_expire_on_and_discount"
     t.index ["name"], name: "index_products_on_name"
     t.index ["url"], name: "index_products_on_url", unique: true
   end
