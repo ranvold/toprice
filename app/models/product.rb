@@ -72,7 +72,7 @@ class Product < ApplicationRecord
       categorized_products.concat(new_products)
     end
 
-    categorized_products.each { |p| puts "#{p.category.name} - #{p.name}" }
+    # categorized_products.each { |p| puts "#{p.category.name} - #{p.name}" }
 
     categorized_products.each(&:save)
   end
