@@ -30,6 +30,17 @@ gem 'pagy', '6.0.4'
 group :development, :test do
   gem 'debug', '1.8.0'
 
-  gem 'rubocop', '1.51.0'
-  gem 'rubocop-rails', '2.19.1'
+  gem 'rubocop', '1.51.0', require: false
+  gem 'rubocop-rails', '2.19.1', require: false
+  gem 'rubocop-rspec', '2.22.0', require: false
+end
+
+group :test do
+  gem 'rspec-rails', '6.0.2'
+
+  gem 'factory_bot_rails', '6.2.0'
+
+  gem 'faker', '3.2.0'
+
+  gem 'shoulda-matchers', '5.3.0'
 end
